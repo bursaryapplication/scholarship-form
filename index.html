@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kisii National Polytechnic Trainee Scholarship — Online Application Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#0b5d3b;
+    --green-dark:#083f29;
+    --green-soft:#e7f1ec;
+    --gold:#c9a227;
+    --gold-soft:#f6efd8;
+    --paper:#faf8f3;
+    --ink:#1f2a24;
+    --muted:#5f6b63;
+    --line:#d8ded8;
+    --line-strong:#b7c1ba;
+    --white:#ffffff;
+    --error:#b3261e;
+    --error-soft:#fcebe9;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(8,63,41,.06),0 8px 28px rgba(8,63,41,.07);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Public Sans',system-ui,sans-serif;
+    background:
+      radial-gradient(1200px 500px at 100% -10%, rgba(201,162,39,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 0%, rgba(11,93,59,.10), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px 80px}
+
+  /* Masthead */
+  header.mast{
+    background:linear-gradient(160deg,var(--green) 0%,var(--green-dark) 100%);
+    color:#eef5f0;
+    border-radius:0 0 26px 26px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    position:relative;
+  }
+  header.mast::after{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 12px,transparent 12px 24px);
+    pointer-events:none;
+  }
+  .mast-inner{max-width:880px;margin:0 auto;padding:34px 20px 30px;position:relative}
+  .crest{display:flex;align-items:center;gap:16px}
+  .seal{
+    width:62px;height:62px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 50% 38%, #1c7a52, #0b5d3b 70%);
+    border:3px solid var(--gold);
+    display:grid;place-items:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+  }
+  .seal span{font-family:'Fraunces',serif;font-weight:700;color:var(--gold);font-size:24px;letter-spacing:.5px}
+  .inst{font-family:'Public Sans';font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:#bfe0cd}
+  .inst small{display:block;letter-spacing:.06em;font-weight:500;color:#9fcbb3;font-size:11px;margin-top:2px;text-transform:none}
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(28px,5vw,42px);line-height:1.05;
+    margin:22px 0 8px;color:#fff;
+  }
+  .tagline{color:#cfe6da;max-width:60ch;font-size:15px;margin:0}
+  .ref-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .pill{
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
+    color:#eaf4ee;font-size:12px;font-weight:600;letter-spacing:.04em;
+    padding:6px 12px;border-radius:999px;
+  }
+  .pill b{color:var(--gold)}
+
+  /* Sticky progress */
+  .progress-bar{
+    position:sticky;top:0;z-index:30;
+    background:rgba(250,248,243,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:10px 0;margin-bottom:26px;
+  }
+  .progress-inner{max-width:880px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px}
+  .track{flex:1;height:8px;background:var(--green-soft);border-radius:999px;overflow:hidden}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--gold));transition:width .4s ease;border-radius:999px}
+  .pct{font-size:13px;font-weight:700;color:var(--green);min-width:42px;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* Sections */
+  .card{
+    background:var(--white);border:1px solid var(--line);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:26px 26px 24px;margin-bottom:22px;
+    scroll-margin-top:80px;
+  }
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .sec-no{
+    width:34px;height:34px;border-radius:9px;flex:none;
+    background:var(--green-soft);color:var(--green);
+    display:grid;place-items:center;font-weight:700;font-family:'Fraunces',serif;
+    border:1px solid #cfe3d8;
+  }
+  .sec-head h2{font-family:'Fraunces',serif;font-weight:600;font-size:22px;margin:0;color:var(--green-dark)}
+  .sec-sub{color:var(--muted);font-size:14px;margin:2px 0 20px 48px}
+  @media(max-width:560px){.sec-sub{margin-left:0}}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+  .grid .full{grid-column:1/-1}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+  label.field{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .req{color:var(--error);font-weight:700;margin-left:2px}
+  .hint{font-weight:400;color:var(--muted);font-size:12.5px;margin-left:6px}
+  input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],select,textarea{
+    width:100%;padding:11px 13px;font:inherit;font-size:15px;color:var(--ink);
+    background:var(--paper);border:1.5px solid var(--line-strong);border-radius:10px;
+    transition:border-color .15s,box-shadow .15s,background .15s;
+  }
+  textarea{min-height:84px;resize:vertical}
+  input:focus,select:focus,textarea:focus{
+    outline:none;border-color:var(--green);background:#fff;
+    box-shadow:0 0 0 3px rgba(11,93,59,.14);
+  }
+  input.bad,select.bad,textarea.bad{border-color:var(--error);background:var(--error-soft)}
+  .err-msg{color:var(--error);font-size:12.5px;margin-top:5px;display:none;font-weight:600}
+  .err-msg.show{display:block}
+  .locked{background:#ebeee9 !important;color:#6b766e;cursor:not-allowed;border-style:dashed}
+  input.good,select.good{border-color:var(--green);background:#f1f8f4}
+  select:disabled{background:#ebeee9;color:#6b766e;cursor:not-allowed;border-style:dashed}
+  .mini-btn{font:inherit;font-weight:600;font-size:13px;border:1.5px solid var(--green);color:var(--green);background:#fff;padding:8px 14px;border-radius:9px;cursor:pointer}
+  .mini-btn:hover{background:var(--green-soft)}
+  .copied{display:none;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--green-dark)}
+  .copied.show{display:block}
+  .caution-keep{background:var(--gold-soft);border:1px solid #e4d49a;color:#6b551a;padding:10px 14px;border-radius:10px;font-size:13.5px;max-width:48ch;margin:0 auto 14px;font-weight:600}
+
+  /* Choice blocks */
+  .choice{
+    display:flex;gap:12px;align-items:flex-start;
+    border:1.5px solid var(--line-strong);border-radius:11px;
+    padding:13px 14px;background:var(--paper);cursor:pointer;
+    transition:border-color .15s,background .15s;
+  }
+  .choice:hover{border-color:var(--green)}
+  .choice input{margin-top:3px;width:18px;height:18px;accent-color:var(--green);flex:none}
+  .choice .c-title{font-weight:600;font-size:14.5px}
+  .choice .c-desc{color:var(--muted);font-size:12.5px;margin-top:2px}
+  .choice.checked{border-color:var(--green);background:var(--green-soft)}
+  .stack{display:grid;gap:10px}
+
+  .callout{
+    border-left:4px solid var(--gold);background:var(--gold-soft);
+    padding:13px 15px;border-radius:0 10px 10px 0;font-size:13.5px;color:#5b4a16;
+  }
+  .callout b{color:#7a6312}
+  .flag{
+    display:none;margin-top:8px;font-size:13px;font-weight:600;
+    padding:9px 12px;border-radius:9px;
+  }
+  .flag.ok{display:block;background:var(--green-soft);color:var(--green-dark);border:1px solid #bcdcca}
+  .flag.warn{display:block;background:var(--error-soft);color:var(--error);border:1px solid #f0c4bf}
+
+  /* Upload */
+  .upload{
+    border:1.5px dashed var(--line-strong);border-radius:11px;background:var(--paper);
+    padding:14px;display:flex;align-items:center;gap:13px;
+  }
+  .up-icon{width:40px;height:40px;border-radius:9px;background:var(--green-soft);display:grid;place-items:center;flex:none;color:var(--green);font-size:18px}
+  .up-body{flex:1;min-width:0}
+  .up-body .t{font-weight:600;font-size:13.5px}
+  .up-body .s{color:var(--muted);font-size:12px}
+  .up-btn{
+    font:inherit;font-weight:600;font-size:13px;border:1.5px solid var(--green);
+    color:var(--green);background:#fff;padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap;
+  }
+  .up-btn:hover{background:var(--green-soft)}
+  .file-name{font-size:12.5px;color:var(--green-dark);font-weight:600;margin-top:6px;word-break:break-all}
+  input[type=file]{display:none}
+
+  /* Submit */
+  .actions{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+  .submit{
+    font:inherit;font-family:'Public Sans';font-weight:700;font-size:17px;letter-spacing:.02em;
+    color:#fff;background:linear-gradient(160deg,var(--green),var(--green-dark));
+    border:none;padding:16px 22px;border-radius:13px;cursor:pointer;
+    box-shadow:0 10px 24px rgba(11,93,59,.28);transition:transform .12s,box-shadow .12s;
+  }
+  .submit:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(11,93,59,.34)}
+  .submit:active{transform:translateY(0)}
+  .submit:disabled{background:#c3ccc6;box-shadow:none;cursor:not-allowed;color:#eef2ef;transform:none}
+  .save-note{text-align:center;color:var(--muted);font-size:12.5px}
+
+  /* Confirmation */
+  .confirm{display:none;text-align:center;padding:46px 26px}
+  .confirm.show{display:block}
+  .check{
+    width:78px;height:78px;border-radius:50%;margin:0 auto 18px;
+    background:var(--green-soft);border:3px solid var(--green);
+    display:grid;place-items:center;color:var(--green);font-size:38px;
+    animation:pop .4s cubic-bezier(.2,1.3,.5,1);
+  }
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  .confirm h2{font-family:'Fraunces',serif;font-size:28px;color:var(--green-dark);margin:0 0 8px}
+  .confirm p{color:var(--muted);max-width:48ch;margin:0 auto 18px}
+  .ref-box{
+    display:inline-block;background:var(--paper);border:1.5px dashed var(--green);
+    border-radius:12px;padding:14px 24px;margin-bottom:10px;
+  }
+  .ref-box .lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .ref-box .val{font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--green-dark);letter-spacing:.5px}
+
+  /* Submitting note */
+  .sending-note{display:none;text-align:center;color:var(--green-dark);font-size:13px;font-weight:600;margin-top:4px}
+  .sending-note.show{display:block}
+
+  footer{max-width:880px;margin:30px auto 0;padding:0 20px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.7}
+  footer b{color:var(--ink)}
+  .skip{position:absolute;left:-9999px;top:auto}
+  .skip:focus{left:20px;top:14px;background:#fff;color:var(--green);padding:8px 14px;border-radius:8px;z-index:50}
+</style>
+</head>
+<body>
+<a href="#mainform" class="skip">Skip to application form</a>
+
+<header class="mast">
+  <div class="mast-inner">
+    <div class="crest">
+      <div class="seal"><span>KNP</span></div>
+      <div class="inst">Kisii National Polytechnic
+        <small>Skills Development &amp; Innovation</small>
+      </div>
+    </div>
+    <h1>Trainee Scholarship Application</h1>
+    <p class="tagline">Opening access to training for females, youth, and vulnerable groups. Complete every required field and attach the listed evidence before the closing date.</p>
+    <div class="ref-pills">
+      <span class="pill">Policy <b>KNP/TSP/33</b></span>
+      <span class="pill">Office: <b>Dean of Students</b></span>
+      <span class="pill">Cycle: <b id="cyclePill">2026</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <span style="font-size:13px;font-weight:700;color:var(--green)">Completion</span>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <span class="pct" id="pct">0%</span>
+  </div>
+</div>
+
+<div class="wrap">
+<form id="mainform" novalidate>
+
+  <!-- A: Personal -->
+  <section class="card" id="secA">
+    <div class="sec-head"><div class="sec-no">A</div><h2>Personal Details</h2></div>
+    <p class="sec-sub">Enter your details exactly as they appear on your identification documents.</p>
+    <div class="grid">
+      <div>
+        <label class="field" for="fname">First name<span class="req">*</span></label>
+        <input type="text" id="fname" data-req autocomplete="given-name" placeholder="e.g. Mary">
+        <div class="err-msg">Please enter your first name.</div>
+      </div>
+      <div>
+        <label class="field" for="lname">Last name<span class="req">*</span></label>
+        <input type="text" id="lname" data-req autocomplete="family-name" placeholder="e.g. Achieng">
+        <div class="err-msg">Please enter your last name.</div>
+      </div>
+      <div class="full">
+        <div class="hint" style="display:block">Write your names as they appear on your ID — first name then last name (e.g. <b>Mary Achieng</b>). Your name will appear as: <b id="namePreview" style="color:var(--green-dark)">—</b></div>
+      </div>
+      <div>
+        <label class="field" for="gender">Gender<span class="req">*</span></label>
+        <select id="gender" data-req>
+          <option value="">Select…</option>
+          <option>Female</option><option>Male</option><option>Prefer to self-describe</option>
+        </select>
+        <div class="err-msg">Please select an option.</div>
+      </div>
+      <div>
+        <label class="field" for="dob">Date of birth<span class="req">*</span></label>
+        <input type="date" id="dob" data-req>
+        <div class="err-msg">Please enter your date of birth.</div>
+        <div class="flag" id="ageFlag"></div>
+      </div>
+      <div>
+        <label class="field" for="idno">National ID / Birth Cert. No.<span class="req">*</span></label>
+        <input type="text" id="idno" data-req>
+        <div class="err-msg">Please enter your ID or birth certificate number.</div>
+      </div>
+      <div>
+        <label class="field" for="nationality">Citizenship<span class="req">*</span></label>
+        <input type="text" id="nationality" value="Kenyan" data-req readonly aria-readonly="true" class="locked">
+        <div class="hint" style="display:block;margin-top:6px">Only Kenyan citizens are eligible for this scholarship.</div>
+      </div>
+      <div>
+        <label class="field" for="phone">Phone number <span class="hint">(10 digits)</span><span class="req">*</span></label>
+        <input type="tel" id="phone" data-req placeholder="07XX XXX XXX" inputmode="numeric" maxlength="10" autocomplete="tel">
+        <div class="err-msg">Enter exactly 10 digits.</div>
+      </div>
+      <div>
+        <label class="field" for="email">Email address<span class="req">*</span></label>
+        <input type="email" id="email" data-req placeholder="you@example.com" autocomplete="email">
+        <div class="err-msg">Please enter a valid email address.</div>
+      </div>
+      <div>
+        <label class="field" for="county">County of residence<span class="req">*</span></label>
+        <input type="text" id="county" data-req>
+        <div class="err-msg">Please enter your county.</div>
+      </div>
+      <div>
+        <label class="field" for="subcounty">Subcounty/Location</label>
+        <input type="text" id="subcounty">
+      </div>
+    </div>
+  </section>
+
+  <!-- B: Programme -->
+  <section class="card" id="secB">
+    <div class="sec-head"><div class="sec-no">B</div><h2>Programme &amp; Trainee Details</h2></div>
+    <p class="sec-sub">Scholarships apply to full-time trainees only. Select your programme, then the matching class code.</p>
+    <div class="grid">
+      <div>
+        <label class="field" for="admno">Admission / Registration No.<span class="req">*</span></label>
+        <input type="text" id="admno" data-req>
+        <div class="err-msg">Please enter your registration number.</div>
+      </div>
+      <div>
+        <label class="field" for="course">Course / Programme<span class="req">*</span></label>
+        <select id="course" data-req>
+          <option value="">Select your programme…</option>
+          <option value="DAH">Diploma in Animal Health and Production</option>
+          <option value="CAH">Certificate in Animal Health and Production</option>
+          <option value="DAEX">Agriculture and Extension — Level 6</option>
+          <option value="CAEX">Agriculture and Extension — Level 5</option>
+          <option value="DHOR">Horticulture Production — Level 6</option>
+          <option value="DAGE">Agricultural Engineering — Level 6</option>
+        </select>
+        <div class="err-msg">Please select your programme.</div>
+      </div>
+      <div>
+        <label class="field" for="classcode">Class Code<span class="req">*</span></label>
+        <select id="classcode" data-req disabled>
+          <option value="">Select programme first…</option>
+        </select>
+        <div class="err-msg">Please select your class code.</div>
+      </div>
+      <div>
+        <label class="field" for="yos">Year of study<span class="req">*</span></label>
+        <select id="yos" data-req>
+          <option value="">Select…</option>
+          <option>Year 1</option><option>Year 2</option><option>Year 3</option>
+        </select>
+        <div class="err-msg">Please select your year of study.</div>
+      </div>
+      <div class="full">
+        <label class="field">Mode of study<span class="req">*</span></label>
+        <div class="stack">
+          <label class="choice"><input type="radio" name="mode" value="Full-time" data-req-group="mode">
+            <span><span class="c-title">Full-time trainee</span><span class="c-desc">Required to be eligible for the scholarship.</span></span></label>
+        </div>
+        <div class="flag" id="modeFlag"></div>
+      </div>
+      <div class="full">
+        <label class="field">Are you a continuing SIFA scholarship recipient applying for renewal?</label>
+        <div class="stack">
+          <label class="choice"><input type="radio" name="renewal" value="No"><span><span class="c-title">No — first application</span></span></label>
+          <label class="choice"><input type="radio" name="renewal" value="Yes"><span><span class="c-title">Yes — renewal</span><span class="c-desc">Awards cover one year; renewal requires reapplication.</span></span></label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- C: Eligibility category -->
+  <section class="card" id="secC">
+    <div class="sec-head"><div class="sec-no">C</div><h2>Eligibility Category</h2></div>
+    <p class="sec-sub">You must fall under at least one category below. Tick all that apply — each must be supported by evidence in Section F.</p>
+    <div class="stack">
+      <label class="choice"><input type="checkbox" name="cat" value="Total orphan" data-cat>
+        <span><span class="c-title">Total orphan</span><span class="c-desc">Both parents deceased. Attach death certificates.</span></span></label>
+      <label class="choice"><input type="checkbox" name="cat" value="Partial orphan" data-cat>
+        <span><span class="c-title">Partial orphan</span><span class="c-desc">One parent deceased. Attach death certificate.</span></span></label>
+      <label class="choice"><input type="checkbox" name="cat" value="Low income" data-cat>
+        <span><span class="c-title">Trainee from a low-income background</span><span class="c-desc">Complete the means-test details in Section D.</span></span></label>
+      <label class="choice"><input type="checkbox" name="cat" value="PWD" data-cat>
+        <span><span class="c-title">Person with disability (PWD)</span><span class="c-desc">Attach NCPWD card or medical assessment report.</span></span></label>
+    </div>
+    <div class="flag" id="catFlag"></div>
+  </section>
+
+  <!-- D: Means test -->
+  <section class="card" id="secD">
+    <div class="sec-head"><div class="sec-no">D</div><h2>Household &amp; Financial Need</h2></div>
+    <p class="sec-sub">Used to assess financial need fairly across all applicants. Answer honestly — entries are verified during due diligence.</p>
+    <div class="grid">
+      <div class="full">
+        <label class="field" for="income">Approximate total monthly household income (KES)<span class="req">*</span></label>
+        <select id="income" data-req>
+          <option value="">Select a band…</option>
+          <option>5,000 and below</option>
+          <option>5,001 – 10,000</option>
+          <option>10,001 – 20,000</option>
+          <option>20,001 – 40,000</option>
+          <option>40,001 – 70,000</option>
+          <option>Above 70,000</option>
+        </select>
+        <div class="err-msg">Please select an income band.</div>
+      </div>
+      <div>
+        <label class="field" for="payer">Who currently pays your fees?<span class="req">*</span></label>
+        <select id="payer" data-req>
+          <option value="">Select…</option>
+          <option>Parent / Guardian</option><option>Self</option><option>Relative</option>
+          <option>Bursary / Well-wisher</option><option value="Other">Other</option>
+        </select>
+        <input type="text" id="payerOther" placeholder="Please specify" style="display:none;margin-top:8px">
+        <div class="err-msg">Please select an option.</div>
+      </div>
+      <div>
+        <label class="field" for="deps">No. of dependants in household<span class="req">*</span></label>
+        <input type="number" id="deps" min="0" max="30" data-req placeholder="e.g. 5">
+        <div class="err-msg">Please enter a number.</div>
+      </div>
+      <div>
+        <label class="field" for="arrears">Current fee arrears (KES)</label>
+        <input type="number" id="arrears" min="0" placeholder="e.g. 32,000">
+      </div>
+      <div class="full">
+        <label class="field">Any other sponsorship(s) held? <span class="hint">(select all that apply)</span></label>
+        <div class="stack">
+          <label class="choice"><input type="checkbox" name="sponsor" value="None" id="sponsorNone"><span><span class="c-title">None</span></span></label>
+          <label class="choice"><input type="checkbox" name="sponsor" value="HELB"><span><span class="c-title">HELB</span></span></label>
+          <label class="choice"><input type="checkbox" name="sponsor" value="County bursary"><span><span class="c-title">County bursary</span></span></label>
+          <label class="choice"><input type="checkbox" name="sponsor" value="NG-CDF"><span><span class="c-title">NG-CDF</span></span></label>
+          <label class="choice"><input type="checkbox" name="sponsor" value="Wings to Fly"><span><span class="c-title">Wings to Fly</span></span></label>
+          <label class="choice"><input type="checkbox" name="sponsor" value="Government scholarships"><span><span class="c-title">Government scholarships</span></span></label>
+          <label class="choice"><input type="checkbox" name="sponsor" value="Other" id="sponsorOther"><span><span class="c-title">Others (specify)</span></span></label>
+        </div>
+        <input type="text" id="sponsorOtherText" placeholder="Please specify other sponsorship(s)" style="display:none;margin-top:10px">
+      </div>
+      <div class="full">
+        <label class="field" for="circumstances">Briefly describe your financial circumstances<span class="req">*</span> <span class="hint">(max 600 characters)</span></label>
+        <textarea id="circumstances" maxlength="600" data-req placeholder="Explain why you need the scholarship to continue and complete your training."></textarea>
+        <div class="err-msg">Please describe your circumstances.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E: Merit -->
+  <section class="card" id="secE">
+    <div class="sec-head"><div class="sec-no">E</div><h2>Academic &amp; Co-curricular Record</h2></div>
+    <p class="sec-sub">Optional, but counts toward selection scoring. Females in SET courses are encouraged to apply.</p>
+    <div class="grid">
+      <div>
+        <label class="field" for="grade">Most recent grade <span class="hint" id="gradeSysHint"></span></label>
+        <select id="grade">
+          <option value="">Select programme first…</option>
+        </select>
+      </div>
+      <div class="full">
+        <label class="field">Is your course in Science, Engineering or Technology (SET)?</label>
+        <div class="stack">
+          <label class="choice checked"><input type="radio" name="set" value="Yes" checked><span><span class="c-title">Yes</span></span></label>
+          <label class="choice" style="opacity:.5;cursor:not-allowed"><input type="radio" name="set" value="No" disabled><span><span class="c-title">No</span></span></label>
+        </div>
+        <div class="flag" id="setFlag"></div>
+      </div>
+      <div class="full">
+        <label class="field" for="achievements">Notable achievements, leadership or community contribution <span class="hint">(optional)</span></label>
+        <textarea id="achievements" maxlength="600" placeholder="Awards, class/club leadership, volunteering, competitions, etc."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- F: Evidence -->
+  <section class="card" id="secF">
+    <div class="sec-head"><div class="sec-no">F</div><h2>Documentary Evidence</h2></div>
+    <p class="sec-sub">Attach clear scans or photos (PDF/JPG/PNG, max 5 MB each). Items marked required must be attached for your application to be considered.</p>
+    <div class="callout" style="margin-bottom:12px"><b>Tip:</b> Attach only the documents relevant to the categories you ticked in Section C. Incomplete applications are screened out.</div>
+    <div class="callout" style="margin-bottom:16px;border-left-color:var(--green);background:var(--green-soft);color:#0c4a30"><b>Certification:</b> Any document issued by Kisii National Polytechnic (admission letter, fee statement, transcripts) must be stamped and certified by the appropriate departmental Head of Department (HoD) before upload.</div>
+    <div class="stack" id="uploads">
+      <!-- upload rows injected by JS -->
+    </div>
+  </section>
+
+  <!-- G: Declarations -->
+  <section class="card" id="secG">
+    <div class="sec-head"><div class="sec-no">G</div><h2>Declarations</h2></div>
+    <p class="sec-sub">All declarations must be confirmed. Providing false information is a ground for termination of the award.</p>
+    <div class="stack">
+      <label class="choice"><input type="checkbox" data-req class="decl"><span><span class="c-title">I am a Kenyan citizen aged between 18 and 35 years.</span></span></label>
+      <label class="choice"><input type="checkbox" data-req class="decl"><span><span class="c-title">I am a full-time trainee of Kisii National Polytechnic.</span></span></label>
+      <label class="choice"><input type="checkbox" data-req class="decl"><span><span class="c-title">I have not previously breached a Kisii National Polytechnic scholarship award.</span></span></label>
+      <label class="choice"><input type="checkbox" data-req class="decl"><span><span class="c-title">The information and documents I have provided are true and accurate to the best of my knowledge.</span></span></label>
+    </div>
+    <div class="flag" id="declFlag"></div>
+  </section>
+
+  <!-- H: Data protection -->
+  <section class="card" id="secH">
+    <div class="sec-head"><div class="sec-no">H</div><h2>Data Protection &amp; Consent</h2></div>
+    <p class="sec-sub">Your data is processed under the Kenya Data Protection Act, 2019.</p>
+    <div class="callout" style="margin-bottom:16px">
+      The personal and sensitive information you provide (including orphan status, household income and disability) is collected solely to assess and administer this scholarship. It will be accessed only by the Selection Panel and authorised Kisii National Polytechnic officers bound by the Oath of Secrecy, retained for the period required by policy, and then securely disposed of. You may request access to or correction of your data through the Dean of Students.
+    </div>
+    <div class="stack">
+      <label class="choice"><input type="checkbox" data-req class="decl"><span><span class="c-title">I consent to Kisii National Polytechnic collecting and processing my personal and sensitive data for the purpose of this scholarship.</span></span></label>
+      <label class="choice"><input type="checkbox" data-req class="decl"><span><span class="c-title">I consent to verification of my information, including referee checks and a home visit if required.</span></span></label>
+    </div>
+    <div class="flag" id="consentFlag"></div>
+  </section>
+
+  <div class="actions">
+    <button type="submit" class="submit" id="submitBtn" disabled>Complete the form to submit</button>
+    <p class="sending-note" id="sendingNote">Submitting your application, please wait…</p>
+    <p class="save-note">The submit button activates only when the form is 100% complete. You will receive a reference number on submission — keep it for any appeal. Each admission number may apply only once.</p>
+  </div>
+</form>
+
+<!-- Confirmation -->
+<section class="card confirm" id="confirm">
+  <div class="check">✓</div>
+  <h2>Application Submitted Successfully</h2>
+  <p>Thank you, <b id="confName">applicant</b>. Your scholarship application has been received and will be screened against the eligibility criteria. All applicants — successful and unsuccessful — will be notified in writing through the Dean of Students.</p>
+  <div class="ref-box">
+    <div class="lbl">Your Reference Number</div>
+    <div class="val" id="refNo">—</div>
+    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button type="button" class="mini-btn" id="copyRef">Copy reference number</button>
+      <button type="button" class="mini-btn" id="emailRef">Email me a copy</button>
+      <button type="button" class="mini-btn" id="downloadRec">Download submission record</button>
+    </div>
+    <div class="copied" id="copiedMsg">Copied to clipboard</div>
+  </div>
+  <p class="caution-keep">Important: keep this reference number safe — you will need it for any appeal.</p>
+  <p style="font-size:13px;color:var(--muted)">Tap "Email me a copy" to send your reference number and confirmation to <b id="confEmail">your email</b>. Appeals, if any, must be made in writing to the Dean of Students within <b>seven (7) days</b> of the scholarship award.</p>
+</section>
+
+<footer>
+  <b>Kisii National Polytechnic</b> · P.O. Box 222 – 40200, Kisii · Trainee Scholarship Policy KNP/TSP/33 (2024 Edition)<br>
+  This online form is the official application channel. For assistance, visit the Dean of Students office or an assisted-application desk on campus.
+</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbw64WbHWExuvoso-zv8gyDfuAwlFNOsi5s5Bp-Qe8_q-Hv9_7056b4HH-rJ4Of9cHueIA/exec';
+
+  // Set cycle year
+  var year = new Date().getFullYear();
+  document.getElementById('cyclePill').textContent = year;
+
+  // ---- Required documentary evidence (drives Section F) ----
+  var docs = [
+    {id:'doc_id',   t:'National ID or Birth Certificate', s:'Proof of identity and age.', req:true},
+    {id:'doc_adm',  t:'Admission / Registration letter',  s:'Full-time status. Must be certified by your departmental HoD.', req:true},
+    {id:'doc_fee',  t:'Fee statement',                    s:'Current fees balance. Must be certified by your departmental HoD.', req:true},
+    {id:'doc_death',t:'Parent death certificate(s)',      s:'Required for orphan category.', req:false},
+    {id:'doc_chief',t:"Chief's / Assistant Chief's letter",s:'Confirms low-income / orphan status.', req:false},
+    {id:'doc_pwd',  t:'NCPWD card or medical assessment', s:'Required for PWD category.', req:false},
+    {id:'doc_acad', t:'Transcripts / certificates',       s:'Optional — supports scoring. If KNP-issued, certify with your HoD.', req:false}
+  ];
+  var uploadsEl = document.getElementById('uploads');
+  docs.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'upload';
+    row.innerHTML =
+      '<div class="up-icon">\uD83D\uDCCE</div>'+
+      '<div class="up-body"><div class="t">'+d.t+(d.req?' <span class="req">*</span>':' <span class="hint">(if applicable)</span>')+'</div>'+
+      '<div class="s">'+d.s+'</div>'+
+      '<div class="file-name" id="name_'+d.id+'"></div></div>'+
+      '<label class="up-btn" for="'+d.id+'">Choose file</label>'+
+      '<input type="file" id="'+d.id+'" accept=".pdf,.jpg,.jpeg,.png" '+(d.req?'data-req-file':'')+'>';
+    uploadsEl.appendChild(row);
+    var input = row.querySelector('input[type=file]');
+    input.addEventListener('change', function(){
+      var nameEl = document.getElementById('name_'+d.id);
+      if(input.files.length){
+        var f = input.files[0];
+        if(f.size > 5*1024*1024){ nameEl.style.color='var(--error)'; nameEl.textContent='File too large (max 5 MB). Choose a smaller file.'; input.value=''; return; }
+        nameEl.style.color='var(--green-dark)';
+        nameEl.textContent = '\u2713 '+f.name;
+      } else { nameEl.textContent=''; }
+      updateProgress();
+    });
+  });
+
+  // ---- Choice block visual state ----
+  document.addEventListener('change', function(e){
+    var inp = e.target;
+    if(inp.type==='radio'){
+      var name = inp.name;
+      document.querySelectorAll('input[name="'+name+'"]').forEach(function(r){
+        var c = r.closest('.choice');
+        if(c) c.classList.toggle('checked', r.checked);
+      });
+    } else if(inp.type==='checkbox'){
+      var c2 = inp.closest('.choice');
+      if(c2) c2.classList.toggle('checked', inp.checked);
+    }
+  });
+
+  // ---- Live flags ----
+  var dob = document.getElementById('dob');
+  dob.addEventListener('change', function(){
+    var f = document.getElementById('ageFlag');
+    if(!dob.value){ f.className='flag'; return; }
+    var age = ageFrom(dob.value);
+    if(age>=18 && age<=35){ f.className='flag ok'; f.textContent='Age '+age+' — within the eligible 18–35 range.'; }
+    else { f.className='flag warn'; f.textContent='Age '+age+' — outside the eligible 18–35 range. You may not qualify.'; }
+  });
+
+  document.querySelectorAll('input[name=mode]').forEach(function(r){
+    r.addEventListener('change',function(){
+      var f=document.getElementById('modeFlag');
+      if(this.value==='Other' && this.checked){ f.className='flag warn'; f.textContent='Only full-time trainees are eligible under this policy.'; }
+      else { f.className='flag'; }
+    });
+  });
+
+  function refreshSetFlag(){
+    var setYes = document.querySelector('input[name=set]:checked');
+    var gender = document.getElementById('gender').value;
+    var f=document.getElementById('setFlag');
+    if(setYes && setYes.value==='Yes' && gender==='Female'){
+      f.className='flag ok'; f.textContent='You qualify as a priority applicant: female in a SET course.';
+    } else { f.className='flag'; }
+  }
+  document.querySelectorAll('input[name=set]').forEach(function(r){r.addEventListener('change',refreshSetFlag);});
+  document.getElementById('gender').addEventListener('change',refreshSetFlag);
+
+  // ---- 'Other' fee payer becomes editable ----
+  var payerSel = document.getElementById('payer');
+  var payerOther = document.getElementById('payerOther');
+  payerSel.addEventListener('change', function(){
+    if(payerSel.value==='Other'){ payerOther.style.display='block'; }
+    else { payerOther.style.display='none'; payerOther.value=''; }
+    updateProgress();
+  });
+
+  // ---- Programme -> Class Code dependency ----
+  var CODES = {
+    DAH:  ['DAHM25','DAHS25','DAHM26'],
+    CAH:  ['CAHM25','CAHS25','CAHM26'],
+    DAEX: ['DAEXS24','DAEXM25','DAEXS25','DAEXJ26','DAEXM26'],
+    CAEX: ['CAEXM25','CAEXS25','CAEXM26'],
+    DHOR: ['DHORS25','DHORS24'],
+    DAGE: ['DAGES24','DAGES25']
+  };
+  var GRADES_OLD = '<option value="">Select…</option><option>Distinction</option><option>Credit</option><option>Pass</option><option>Refer</option><option>N/A</option>';
+  var GRADES_CBET = '<option value="">Select…</option><option>Mastery</option><option>Proficiency</option><option>Competent</option><option>Not yet competent</option><option>N/A</option>';
+
+  var courseSel = document.getElementById('course');
+  var classSel  = document.getElementById('classcode');
+  var gradeSel  = document.getElementById('grade');
+  var gHint     = document.getElementById('gradeSysHint');
+
+  courseSel.addEventListener('change', function(){
+    var val = courseSel.value;
+    var codes = CODES[val] || [];
+
+    if(!val){
+      classSel.disabled = true;
+      classSel.innerHTML = '<option value="">Select programme first…</option>';
+    } else if(codes.length === 0){
+      classSel.disabled = true;
+      classSel.innerHTML = '<option value="">No class codes listed — contact Dean of Students</option>';
+    } else {
+      classSel.disabled = false;
+      var html = '<option value="">Select your class code…</option>';
+      for(var i=0;i<codes.length;i++){
+        html += '<option value="'+codes[i]+'">'+codes[i]+'</option>';
+      }
+      classSel.innerHTML = html;
+    }
+
+    // grade system depends on programme: Animal Health & Production uses the old system; others are CBET
+    if(!val){
+      gradeSel.innerHTML = '<option value="">Select programme first…</option>';
+      gHint.textContent = '';
+    } else if(val === 'DAH' || val === 'CAH'){
+      gradeSel.innerHTML = GRADES_OLD;
+      gHint.textContent = '(Animal Health & Production grading)';
+    } else {
+      gradeSel.innerHTML = GRADES_CBET;
+      gHint.textContent = '(CBET grading)';
+    }
+
+    updateProgress();
+  });
+  classSel.addEventListener('change', updateProgress);
+
+  // ---- 'Others (specify)' sponsorship + 'None' exclusivity ----
+  var sponsorOther = document.getElementById('sponsorOther');
+  var sponsorOtherText = document.getElementById('sponsorOtherText');
+  var sponsorNone = document.getElementById('sponsorNone');
+  sponsorOther.addEventListener('change', function(){
+    sponsorOtherText.style.display = sponsorOther.checked ? 'block' : 'none';
+    if(!sponsorOther.checked) sponsorOtherText.value = '';
+  });
+  document.querySelectorAll('input[name=sponsor]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      if(cb===sponsorNone && cb.checked){
+        document.querySelectorAll('input[name=sponsor]').forEach(function(o){
+          if(o!==sponsorNone){ o.checked=false; var oc=o.closest('.choice'); if(oc) oc.classList.remove('checked'); }
+        });
+        sponsorOtherText.style.display='none'; sponsorOtherText.value='';
+      } else if(cb!==sponsorNone && cb.checked && sponsorNone){
+        sponsorNone.checked=false; var nc=sponsorNone.closest('.choice'); if(nc) nc.classList.remove('checked');
+      }
+    });
+  });
+
+  // ---- Persisted submissions (guarded: localStorage with in-memory fallback) ----
+  var store = (function(){
+    var mem = {};
+    return {
+      get: function(k){ try { return window.localStorage.getItem(k); } catch(e){ return (k in mem) ? mem[k] : null; } },
+      set: function(k,v){ try { window.localStorage.setItem(k,v); } catch(e){ mem[k] = v; } }
+    };
+  })();
+  function submittedSet(){ try { return JSON.parse(store.get('knp_sch_admnos') || '[]'); } catch(e){ return []; } }
+  function markSubmitted(adm){ var a = submittedSet(); if(a.indexOf(adm) === -1){ a.push(adm); store.set('knp_sch_admnos', JSON.stringify(a)); } }
+
+  // ---- Live name preview ----
+  function titleCase(s){ return s.replace(/\s+/g,' ').trim().toLowerCase().replace(/\b\w/g,function(ch){return ch.toUpperCase();}); }
+  var fnameEl = document.getElementById('fname'), lnameEl = document.getElementById('lname'), namePreview = document.getElementById('namePreview');
+  function refreshName(){ var full = (titleCase(fnameEl.value)+' '+titleCase(lnameEl.value)).trim(); namePreview.textContent = full || '—'; }
+  fnameEl.addEventListener('input', refreshName); lnameEl.addEventListener('input', refreshName);
+
+  // ---- Phone: digits only, exactly 10 (green when full, red when short) ----
+  var phoneEl = document.getElementById('phone');
+  phoneEl.addEventListener('input', function(){
+    var d = phoneEl.value.replace(/\D/g,'').slice(0,10);
+    phoneEl.value = d;
+    phoneEl.classList.remove('good','bad');
+    if(d.length === 10){
+      phoneEl.classList.add('good');
+      var m = phoneEl.parentElement.querySelector('.err-msg'); if(m) m.classList.remove('show');
+    } else if(d.length > 0){
+      phoneEl.classList.add('bad');
+    }
+    updateProgress();
+  });
+
+  // ---- Caution when leaving a required field empty ----
+  document.querySelectorAll('#mainform input[data-req], #mainform select[data-req], #mainform textarea[data-req]').forEach(function(el){
+    if(el.type === 'checkbox') return;
+    el.addEventListener('blur', function(){
+      if(el === phoneEl){ showErr(el, phoneEl.value.length !== 10); return; }
+      showErr(el, el.value.trim() === '');
+    });
+  });
+
+  // ---- Copy + email the reference number ----
+  var copiedMsg = document.getElementById('copiedMsg');
+  document.getElementById('copyRef').addEventListener('click', function(){
+    var ref = document.getElementById('refNo').textContent;
+    function done(){ if(copiedMsg){ copiedMsg.classList.add('show'); setTimeout(function(){ copiedMsg.classList.remove('show'); }, 2200); } }
+    function fallback(){ var t = document.createElement('textarea'); t.value = ref; document.body.appendChild(t); t.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(t); done(); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(ref).then(done, fallback); } else { fallback(); }
+  });
+  document.getElementById('emailRef').addEventListener('click', function(){
+    var ref = document.getElementById('refNo').textContent;
+    var em = document.getElementById('email').value;
+    var subj = encodeURIComponent('Kisii National Polytechnic SIFA Scholarship - Application Reference');
+    var body = encodeURIComponent('Your SIFA scholarship application was submitted successfully.\n\nReference number: ' + ref + '\n\nKeep this reference number safe - you will need it for any appeal.\n\nOffice of the Dean of Students, Kisii National Polytechnic.');
+    window.location.href = 'mailto:' + encodeURIComponent(em) + '?subject=' + subj + '&body=' + body;
+  });
+
+  // ---- Build structured submission record (feeds the panel scoring tool) ----
+  function buildRecord(ref){
+    function v(id){ var e = document.getElementById(id); return e ? (e.value||'').trim() : ''; }
+    function checks(name){ return Array.prototype.map.call(document.querySelectorAll('input[name="'+name+'"]:checked'), function(c){ return c.value; }); }
+    var course = v('course');
+    var gradeSystem = (course === 'DAH' || course === 'CAH') ? 'OLD' : (course ? 'CBET' : '');
+    return {
+      ref: ref, submittedAt: new Date().toISOString(),
+      firstName: v('fname'), lastName: v('lname'), gender: v('gender'),
+      dob: v('dob'), idno: v('idno'), citizenship: v('nationality'),
+      phone: v('phone'), email: v('email'), county: v('county'), subcounty: v('subcounty'),
+      admno: v('admno'), programme: course, classcode: v('classcode'), yearOfStudy: v('yos'),
+      mode: (document.querySelector('input[name=mode]:checked')||{}).value || '',
+      renewal: (document.querySelector('input[name=renewal]:checked')||{}).value || '',
+      categories: checks('cat'),
+      income: v('income'),
+      payer: (v('payer') === 'Other' ? ('Other: ' + v('payerOther')) : v('payer')),
+      dependants: v('deps'), arrears: v('arrears'),
+      sponsors: checks('sponsor'), sponsorOther: v('sponsorOtherText'),
+      circumstances: v('circumstances'),
+      gradeSystem: gradeSystem, grade: v('grade'),
+      set: (document.querySelector('input[name=set]:checked')||{}).value || '',
+      achievements: v('achievements'),
+      declarations: true, consent: true
+    };
+  }
+  document.getElementById('downloadRec').addEventListener('click', function(){
+    if(!window.__rec) return;
+    var blob = new Blob([JSON.stringify(window.__rec, null, 2)], {type:'application/json'});
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = 'KNP_SIFA_application_' + String(window.__rec.ref||'record').replace(/[\/\\]/g,'-') + '.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+
+  // ---- Progress ----
+  function controls(){
+    return Array.prototype.slice.call(document.querySelectorAll('#mainform [data-req], #mainform [data-req-file]'))
+      .concat([{group:'mode'}]); // required radio group
+  }
+  function isFilled(el){
+    if(el.group){ return !!document.querySelector('input[name="'+el.group+'"]:checked'); }
+    if(el.type==='checkbox') return el.checked;
+    if(el.type==='file') return el.files && el.files.length>0;
+    if(el.id==='phone') return /^\d{10}$/.test(el.value);
+    return el.value.trim()!=='';
+  }
+  function updateProgress(){
+    var list = controls();
+    var done = list.filter(isFilled).length;
+    var catDone = document.querySelectorAll('input[name=cat]:checked').length>0 ? 1:0;
+    var total = list.length + 1; // +1 for category requirement
+    var got = done + catDone;
+    var pct = Math.round((got/total)*100);
+    document.getElementById('fill').style.width = pct+'%';
+    document.getElementById('pct').textContent = pct+'%';
+    var complete = got >= total;
+    var btn = document.getElementById('submitBtn');
+    if(btn){
+      btn.disabled = !complete;
+      btn.textContent = complete ? 'Submit Application' : 'Complete the form to submit (' + pct + '%)';
+    }
+  }
+  document.getElementById('mainform').addEventListener('input', updateProgress);
+  document.getElementById('mainform').addEventListener('change', updateProgress);
+
+  // ---- Validation + submit ----
+  function ageFrom(d){
+    var b=new Date(d), n=new Date(), a=n.getFullYear()-b.getFullYear();
+    var m=n.getMonth()-b.getMonth();
+    if(m<0 || (m===0 && n.getDate()<b.getDate())) a--;
+    return a;
+  }
+  function showErr(el,bad){
+    el.classList.toggle('bad',bad);
+    var msg = el.parentElement.querySelector('.err-msg');
+    if(msg) msg.classList.toggle('show',bad);
+  }
+
+  function fileToBase64(file){
+    return new Promise(function(resolve, reject){
+      var reader = new FileReader();
+      reader.onload = function(){ resolve(reader.result.split(',')[1]); };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  document.getElementById('mainform').addEventListener('submit', function(e){
+    e.preventDefault();
+    var firstBad=null;
+
+    // standard required fields
+    document.querySelectorAll('#mainform [data-req]').forEach(function(el){
+      if(el.type==='checkbox') return; // handled below
+      var bad = el.value.trim()==='';
+      if(el.type==='email' && el.value){ bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value); }
+      if(el.id==='phone'){ bad = !/^\d{10}$/.test(el.value); }
+      showErr(el,bad);
+      if(bad && !firstBad) firstBad=el;
+    });
+
+    // required file
+    document.querySelectorAll('#mainform [data-req-file]').forEach(function(el){
+      var bad = !(el.files && el.files.length>0);
+      var nameEl = document.getElementById('name_'+el.id);
+      if(bad && nameEl){ nameEl.style.color='var(--error)'; if(!nameEl.textContent) nameEl.textContent='Required attachment.'; }
+      if(bad && !firstBad) firstBad = el.closest('.upload');
+    });
+
+    // required mode radio
+    var modeOk = !!document.querySelector('input[name=mode]:checked');
+    document.getElementById('modeFlag').className = modeOk ? document.getElementById('modeFlag').className : 'flag warn';
+    if(!modeOk){ document.getElementById('modeFlag').textContent='Please select your mode of study.'; if(!firstBad) firstBad=document.getElementById('secB'); }
+
+    // at least one category
+    var catOk = document.querySelectorAll('input[name=cat]:checked').length>0;
+    document.getElementById('catFlag').className = catOk ? 'flag' : 'flag warn';
+    if(!catOk){ document.getElementById('catFlag').textContent='Select at least one eligibility category.'; if(!firstBad) firstBad=document.getElementById('secC'); }
+
+    // declarations + consent
+    var decls = document.querySelectorAll('.decl');
+    var allDecl = Array.prototype.every.call(decls,function(c){return c.checked;});
+    var dF=document.getElementById('declFlag'), cF=document.getElementById('consentFlag');
+    if(!allDecl){
+      dF.className='flag warn'; dF.textContent='All declarations must be ticked.';
+      cF.className='flag warn'; cF.textContent='Consent is required to submit.';
+      if(!firstBad) firstBad=document.getElementById('secG');
+    } else { dF.className='flag'; cF.className='flag'; }
+
+    if(firstBad){
+      firstBad.scrollIntoView({behavior:'smooth',block:'center'});
+      if(firstBad.focus) firstBad.focus({preventScroll:true});
+      return;
+    }
+
+    // block double registration by admission number
+    var admEl = document.getElementById('admno');
+    var adm = (admEl.value||'').trim().toUpperCase();
+    if(submittedSet().indexOf(adm) !== -1){
+      showErr(admEl, true);
+      var dm = admEl.parentElement.querySelector('.err-msg');
+      if(dm) dm.textContent = 'An application with this admission number has already been submitted. Double registration is not allowed.';
+      admEl.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+
+    // success — record submission, generate reference number
+    markSubmitted(adm);
+    var rand = Math.floor(1000+Math.random()*9000);
+    var ref = 'KNP/SCH/'+year+'/'+rand;
+    window.__rec = buildRecord(ref);
+
+    var submitBtn = document.getElementById('submitBtn');
+    var sendingNote = document.getElementById('sendingNote');
+    submitBtn.disabled = true;
+    sendingNote.classList.add('show');
+
+    var fileFields = ['doc_id','doc_adm','doc_fee','doc_death','doc_chief','doc_pwd','doc_acad'];
+    var filePromises = fileFields.map(function(id){
+      var input = document.getElementById(id);
+      if(input && input.files && input.files[0]){
+        return fileToBase64(input.files[0]).then(function(b64){
+          return {key:id, data:{name:input.files[0].name, mimeType:input.files[0].type, data:b64}};
+        });
+      }
+      return Promise.resolve({key:id, data:null});
+    });
+
+    Promise.all(filePromises).then(function(results){
+      var files = {};
+      results.forEach(function(r){ if(r.data) files[r.key] = r.data; });
+      var payload = Object.assign({}, window.__rec, {files: files});
+
+      return fetch(SHEET_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {'Content-Type':'text/plain;charset=utf-8'}
+      });
+    }).catch(function(err){
+      console.error('Sheet submission failed:', err);
+    }).finally(function(){
+      showConfirmation(ref);
+    });
+
+  });
+
+  function showConfirmation(ref){
+    document.getElementById('refNo').textContent = ref;
+    document.getElementById('confName').textContent =
+      (document.getElementById('fname').value+' '+document.getElementById('lname').value).trim();
+    var ce=document.getElementById('confEmail'); if(ce) ce.textContent=document.getElementById('email').value;
+    document.getElementById('mainform').style.display='none';
+    var c=document.getElementById('confirm'); c.classList.add('show');
+    c.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
