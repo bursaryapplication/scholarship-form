@@ -568,9 +568,9 @@
     {id:'doc_adm',  t:'Admission / Registration letter',  s:'Full-time status. Must be certified by your departmental HoD.', req:true},
     {id:'doc_fee',  t:'Fee statement',                    s:'Current fees balance. Must be certified by Finance Officer.', req:true},
     {id:'doc_death',t:'Parent death certificate(s)',      s:'Required for orphan category.', req:false, cats:['Total orphan','Partial orphan']},
+    {id:'doc_mpesa',t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false, cats:['Low income']},
     {id:'doc_chief',t:"Chief's / Assistant Chief's letter",s:'Confirms low-income / orphan status.', req:false, cats:['Total orphan','Partial orphan','Low income']},
     {id:'doc_pwd',  t:'NCPWD card', s:'Required for PWD category.', req:false, cats:['PWD']},
-    {id:'doc_mpesa',t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false, cats:['Low income']},
     {id:'doc_acad', t:'Transcripts / certificates',       s:'Optional — supports scoring. If KNP-issued, certify with your HoD.', req:false}
   ];
   var uploadsEl = document.getElementById('uploads');
