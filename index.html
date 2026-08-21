@@ -565,7 +565,7 @@
     {id:'doc_death',t:'Parent death certificate(s)',      s:'Required for orphan category.', req:false},
     {id:'doc_chief',t:"Chief's / Assistant Chief's letter",s:'Confirms low-income / orphan status.', req:false},
     {id:'doc_pwd',  t:'NCPWD card', s:'Required for PWD category.', req:false},
-    {id:'doc_pwd',  t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false},
+    {id:'doc_mpesa',  t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false},
     {id:'doc_acad', t:'Transcripts / certificates',       s:'Optional — supports scoring. If KNP-issued, certify with your HoD.', req:false}
   ];
   var uploadsEl = document.getElementById('uploads');
@@ -933,7 +933,7 @@
     submitBtn.disabled = true;
     sendingNote.classList.add('show');
 
-    var fileFields = ['doc_id','doc_adm','doc_fee','doc_death','doc_chief','doc_pwd','doc_acad'];
+    var fileFields = ['doc_id','doc_adm','doc_fee','doc_death','doc_chief','doc_pwd','doc_acad','doc_mpesa'];
     var filePromises = fileFields.map(function(id){
       var input = document.getElementById(id);
       if(input && input.files && input.files[0]){
