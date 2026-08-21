@@ -839,7 +839,7 @@
       ref: ref, submittedAt: new Date().toISOString(),
       firstName: v('fname'), lastName: v('lname'), gender: v('gender'),
       dob: v('dob'), idno: v('idno'), citizenship: v('nationality'),
-      phone: v('phone'), email: v('email'), county: v('county'), subcounty: v('subcounty'),
+      phone: v('phone'), email: v('email'), county: v('county'), subcounty: v('subcounty'), location: v('location'), ward: v('ward')
       admno: v('admno'), programme: course, classcode: v('classcode'), yearOfStudy: v('yos'),
       mode: (document.querySelector('input[name=mode]:checked')||{}).value || '',
       renewal: (document.querySelector('input[name=renewal]:checked')||{}).value || '',
@@ -986,7 +986,7 @@
     submitBtn.disabled = true;
     sendingNote.classList.add('show');
 
-    var fileFields = ['doc_id','doc_adm','doc_fee','doc_death','doc_chief','doc_pwd','doc_acad','doc_mpesa'];
+    var fileFields = ['doc_id','doc_adm','doc_fee','doc_death','doc_mpesa','doc_chief','doc_pwd','doc_acad'];
     var filePromises = fileFields.map(function(id){
       var input = document.getElementById(id);
       if(input && input.files && input.files[0]){
