@@ -565,7 +565,7 @@
   // and required. Rows without `cats` are always visible (per their own `req`).
   var docs = [
     {id:'doc_id',   t:'National ID or Birth Certificate', s:'Proof of identity and age.', req:true},
-    {id:'doc_adm',  t:'Admission / Registration letter/Student ID',  s:'Full-time status. ', req:true},
+    {id:'doc_adm',  t:'Admission letter/Student ID',  s:'Full-time status. ', req:true},
     {id:'doc_fee',  t:'Fee statement',                    s:'Current fees balance. Must be certified by Finance Officer.', req:true},
     {id:'doc_death',t:'Parent death certificate(s)',      s:'Required for orphan category.', req:false, cats:['Total orphan','Partial orphan']},
     {id:'doc_mpesa',t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false, cats:['Low income']},
