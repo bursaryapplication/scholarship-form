@@ -379,7 +379,7 @@
   <!-- C: Eligibility category -->
   <section class="card" id="secC">
     <div class="sec-head"><div class="sec-no">C</div><h2>Eligibility Category</h2></div>
-    <p class="sec-sub">You must fall under at least one category below. Tick all that apply — each must be supported by evidence in Section F.</p>
+    <p class="sec-sub">You must fall under at least one category below. Tick all that apply — the required attachments in Section F will update to match your selection.</p>
     <div class="stack">
       <label class="choice"><input type="checkbox" name="cat" value="Total orphan" data-cat>
         <span><span class="c-title">Total orphan</span><span class="c-desc">Both parents deceased. Attach death certificates.</span></span></label>
@@ -388,7 +388,7 @@
       <label class="choice"><input type="checkbox" name="cat" value="Low income" data-cat>
         <span><span class="c-title">Trainee from a low-income background</span><span class="c-desc">Complete the means-test details in Section D.</span></span></label>
       <label class="choice"><input type="checkbox" name="cat" value="PWD" data-cat>
-        <span><span class="c-title">Person with disability (PWD)</span><span class="c-desc">Attach NCPWD card or medical assessment report.</span></span></label>
+        <span><span class="c-title">Person with disability (PWD)</span><span class="c-desc">Attach NCPWD card.</span></span></label>
     </div>
     <div class="flag" id="catFlag"></div>
   </section>
@@ -443,7 +443,6 @@
         </div>
         <input type="text" id="sponsorOtherText" placeholder="Please specify other sponsorship(s)" style="display:none;margin-top:10px">
       </div>
-      </div>
   </section>
 
   <!-- E: Merit -->
@@ -476,7 +475,7 @@
   <section class="card" id="secF">
     <div class="sec-head"><div class="sec-no">F</div><h2>Documentary Evidence</h2></div>
     <p class="sec-sub">Attach clear scans or photos (PDF/JPG/PNG, max 5 MB each). Items marked required must be attached for your application to be considered.</p>
-    <div class="callout" style="margin-bottom:12px"><b>Tip:</b> Attach only the documents relevant to the categories you ticked in Section C. Incomplete applications are screened out.</div>
+    <div class="callout" style="margin-bottom:12px"><b>Tip:</b> The list below adjusts automatically to match the eligibility categories you ticked in Section C. Incomplete applications are screened out.</div>
     <div class="callout" style="margin-bottom:16px;border-left-color:var(--green);background:var(--green-soft);color:#0c4a30"><b>Certification:</b> Any document issued by Kisii National Polytechnic (admission letter, fee statement, transcripts) must be stamped and certified by the appropriate departmental Head of Department (HoD) before upload.</div>
     <div class="stack" id="uploads">
       <!-- upload rows injected by JS -->
@@ -553,23 +552,28 @@
   document.getElementById('cyclePill').textContent = year;
 
   // ---- Required documentary evidence (drives Section F) ----
+  // `cats`: if present, this row is hidden until the applicant ticks one of the
+  // listed eligibility categories in Section C, at which point it becomes visible
+  // and required. Rows without `cats` are always visible (per their own `req`).
   var docs = [
     {id:'doc_id',   t:'National ID or Birth Certificate', s:'Proof of identity and age.', req:true},
     {id:'doc_adm',  t:'Admission / Registration letter',  s:'Full-time status. Must be certified by your departmental HoD.', req:true},
-    {id:'doc_fee',  t:'Fee statement',                    s:'Current fees balance. Must be certified by your Finace Officer.', req:true},
-    {id:'doc_death',t:'Parent death certificate(s)',      s:'Required for orphan category.', req:false},
-    {id:'doc_chief',t:"Chief's / Assistant Chief's letter",s:'Confirms low-income / orphan status.', req:false},
-    {id:'doc_pwd',  t:'NCPWD card', s:'Required for PWD category.', req:false},
-    {id:'doc_mpesa',  t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false},
+    {id:'doc_fee',  t:'Fee statement',                    s:'Current fees balance. Must be certified by Finance Officer.', req:true},
+    {id:'doc_death',t:'Parent death certificate(s)',      s:'Required for orphan category.', req:false, cats:['Total orphan','Partial orphan']},
+    {id:'doc_chief',t:"Chief's / Assistant Chief's letter",s:'Confirms low-income / orphan status.', req:false, cats:['Total orphan','Partial orphan','Low income']},
+    {id:'doc_pwd',  t:'NCPWD card', s:'Required for PWD category.', req:false, cats:['PWD']},
+    {id:'doc_mpesa',t:'Mpesa statement', s:'Required for Trainee from a low-income background.', req:false, cats:['Low income']},
     {id:'doc_acad', t:'Transcripts / certificates',       s:'Optional — supports scoring. If KNP-issued, certify with your HoD.', req:false}
   ];
   var uploadsEl = document.getElementById('uploads');
   docs.forEach(function(d){
     var row = document.createElement('div');
     row.className = 'upload';
+    row.id = 'row_'+d.id;
+    if(d.cats){ row.style.display = 'none'; } // category-gated rows start hidden
     row.innerHTML =
       '<div class="up-icon">\uD83D\uDCCE</div>'+
-      '<div class="up-body"><div class="t">'+d.t+(d.req?' <span class="req">*</span>':' <span class="hint">(if applicable)</span>')+'</div>'+
+      '<div class="up-body"><div class="t" id="label_'+d.id+'">'+d.t+(d.req?' <span class="req">*</span>':' <span class="hint" data-optional-label>(if applicable)</span>')+'</div>'+
       '<div class="s">'+d.s+'</div>'+
       '<div class="file-name" id="name_'+d.id+'"></div></div>'+
       '<label class="up-btn" for="'+d.id+'">Choose file</label>'+
@@ -586,6 +590,36 @@
       } else { nameEl.textContent=''; }
       updateProgress();
     });
+  });
+
+  // ---- Show/hide + require category-gated attachments based on Section C ----
+  function refreshDocVisibility(){
+    var selectedCats = Array.prototype.map.call(document.querySelectorAll('input[name=cat]:checked'), function(c){ return c.value; });
+    docs.forEach(function(d){
+      if(!d.cats) return; // not category-gated, always shown
+      var row = document.getElementById('row_'+d.id);
+      var input = document.getElementById(d.id);
+      var label = document.getElementById('label_'+d.id);
+      if(!row || !input) return;
+      var relevant = d.cats.some(function(c){ return selectedCats.indexOf(c) !== -1; });
+      if(relevant){
+        row.style.display = '';
+        input.setAttribute('data-req-file','');
+        if(label) label.innerHTML = d.t + ' <span class="req">*</span>';
+      } else {
+        row.style.display = 'none';
+        input.removeAttribute('data-req-file');
+        input.value = '';
+        input.classList.remove('bad');
+        var nameEl = document.getElementById('name_'+d.id);
+        if(nameEl){ nameEl.textContent=''; nameEl.style.color=''; }
+        if(label) label.innerHTML = d.t + ' <span class="hint" data-optional-label>(if applicable)</span>';
+      }
+    });
+    updateProgress();
+  }
+  document.querySelectorAll('input[name=cat]').forEach(function(cb){
+    cb.addEventListener('change', refreshDocVisibility);
   });
 
   // ---- Choice block visual state ----
@@ -872,7 +906,7 @@
       if(bad && !firstBad) firstBad=el;
     });
 
-    // required file
+    // required file (only currently-visible / category-relevant rows carry data-req-file)
     document.querySelectorAll('#mainform [data-req-file]').forEach(function(el){
       var bad = !(el.files && el.files.length>0);
       var nameEl = document.getElementById('name_'+el.id);
@@ -967,6 +1001,7 @@
     c.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
+  refreshDocVisibility();
   updateProgress();
 })();
 </script>
