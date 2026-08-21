@@ -381,9 +381,9 @@
     <div class="sec-head"><div class="sec-no">C</div><h2>Eligibility Category</h2></div>
     <p class="sec-sub">You must fall under at least one category below. Tick all that apply — the required attachments in Section F will update to match your selection.</p>
     <div class="stack">
-      <label class="choice"><input type="checkbox" name="cat" value="Total orphan" data-cat>
+      <label class="choice"><input type="checkbox" name="cat" value="Total orphan" id="catTotalOrphan" data-cat>
         <span><span class="c-title">Total orphan</span><span class="c-desc">Both parents deceased. Attach death certificates.</span></span></label>
-      <label class="choice"><input type="checkbox" name="cat" value="Partial orphan" data-cat>
+      <label class="choice"><input type="checkbox" name="cat" value="Partial orphan" id="catPartialOrphan" data-cat>
         <span><span class="c-title">Partial orphan</span><span class="c-desc">One parent deceased. Attach death certificate.</span></span></label>
       <label class="choice"><input type="checkbox" name="cat" value="Low income" data-cat>
         <span><span class="c-title">Trainee from a low-income background</span><span class="c-desc">Complete the means-test details in Section D.</span></span></label>
@@ -620,6 +620,22 @@
   }
   document.querySelectorAll('input[name=cat]').forEach(function(cb){
     cb.addEventListener('change', refreshDocVisibility);
+  });
+
+  // ---- 'Total orphan' and 'Partial orphan' are mutually exclusive ----
+  var catTotalOrphan = document.getElementById('catTotalOrphan');
+  var catPartialOrphan = document.getElementById('catPartialOrphan');
+  function uncheck(cb){
+    if(!cb || !cb.checked) return;
+    cb.checked = false;
+    var c = cb.closest('.choice');
+    if(c) c.classList.remove('checked');
+  }
+  catTotalOrphan.addEventListener('change', function(){
+    if(catTotalOrphan.checked){ uncheck(catPartialOrphan); refreshDocVisibility(); }
+  });
+  catPartialOrphan.addEventListener('change', function(){
+    if(catPartialOrphan.checked){ uncheck(catTotalOrphan); refreshDocVisibility(); }
   });
 
   // ---- Choice block visual state ----
